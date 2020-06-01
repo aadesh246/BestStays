@@ -19,7 +19,7 @@ var campgroundRoutes = require("./routes/campgrounds.js"),
 var passport = require('passport');
 
 var GoogleStrategy = require( 'passport-google-oauth2' ).Strategy;
-mongoose.connect("mongodb+srv://aadesh:aadesh123@cluster0-pavwg.mongodb.net/test?retryWrites=true&w=majority",{
+mongoose.connect(process.env.DATABASEURL,{
 	useNewUrlParser:true,
 	useCreateIndex:true
 }).then(() =>{console.log("Connected")});
