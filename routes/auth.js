@@ -12,7 +12,7 @@ router.post("/register",function(req,res)
     User.register(newUser, req.body.password, function(err, user){
         if(err){
             console.log(err);
-            return res.render("register.ejs",{error:err});
+            return res.render("register.ejs",{error:err.message});
         }
         passport.authenticate("local")(req, res, function(){
           { req.flash("success","Sign up successful");res.redirect("/campgrounds"); }
