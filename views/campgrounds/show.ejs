@@ -1,0 +1,62 @@
+<%-include("../partials/header.ejs")%>
+<div class = "container">
+	<div class = "row">
+		<div class = " col-sm-3">
+			<p class = "lead">
+				YelpCamp
+			</p>
+			<ul class="list-group">
+  <li class="list-group-item active">Info 1</li>
+  <li class="list-group-item">Info 2</li>
+  <li class="list-group-item">Info 3</li>
+  </ul>
+
+		</div>
+		<div class = "col-sm-9">
+			<div class ="thumbnail">
+<img src="<%=newc.image%>" class ="img-responsive" style="width:100%">
+<div class ="caption">
+		<h4 class ="pull-right">$<%=newc.price%>/night</h4>
+	<h4><a><%=newc.name%></a> </h4>		<p>
+	<%=newc.description%></p>
+	<em>Submitted By <% if(newc.author.username){%><%=newc.author.username%><%}%> <%if(!newc.author.username){%>Aadesh<%}%></em>
+
+	<div>
+		<%if(currentUser && currentUser.username===newc.author.username){%><a class = "btn btn-warning btn-xs" href="/campgrounds/<%=newc._id%>/edit">Edit</a>
+		<form style ="display:inline" nameaction = "/campgrounds/<%=newc._id%>?_method=DELETE"method ="POST">
+			<button class="btn btn-danger btn-xs">
+				Delete
+			</button>
+		</form>
+		<%}%>
+	</div>
+
+					</div></div>
+<div class ="well" style ="background:#d3e5e6">
+	<div><a href = "/campgrounds/<%=newc._id%>/comments/new" class ="btn btn-success pull-right">Add new comment</a>
+	</div>
+	<br>
+	<hr>
+	
+	<%newc.comments.forEach(function(comment){%>
+<div style="margin-bottom:10px" class ="comment"> <span><strong><%=comment.author.username%></strong></span> <span class ="pull-right"><%=comment.date.toDateString()%></span> 
+	<div>
+		<%=comment.text%><%if(currentUser&&comment.author.username===currentUser.username){%> <span class="pull-right" ><a href = "/campgrounds/<%=newc._id%>/comments/<%=comment._id%>/edit"><i class="far fa-edit"></i></a>
+		
+	<form style="display:inline" action = "/campgrounds/<%=newc._id%>/comments/<%=comment._id%>?_method=DELETE" method="POST">
+		<button style="padding:0; border:none; background:none">
+			<i class="fas fa-trash-alt"></i>
+		</button>
+	</form></span><%}%>
+
+	</div>
+	</div>
+
+<%});%>
+
+			</div>
+
+		</div>
+	</div>
+</div>	
+<%-include("../partials/footer.ejs")%>
