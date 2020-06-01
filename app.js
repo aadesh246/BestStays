@@ -96,7 +96,9 @@ app.get("/",function(req,res)
 app.use(campgroundRoutes);
 app.use(commentRoutes);
 app.use(authRoutes);
-app.listen(3000,function()
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT,function()
 		  {
 	console.log("YelpCamp has started");
 });
