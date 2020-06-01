@@ -40,7 +40,7 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.use(new GoogleStrategy({
     clientID: "313017906178-sd6u4rtmg4arq0lcrqhlcv5g9mh9rh8s.apps.googleusercontent.com",
     clientSecret: "49ZCkG0VvmGhHm5LSu4tKfvl",
-    callbackURL: "https://moviebuff.run-ap-south1.goorm.io/auth/google/callback",
+    callbackURL: "https://yelp-camp-aadesh.herokuapp.com/auth/google/callback",
 	     passReqToCallback   : true
   },
   function(request, accessToken, refreshToken, profile, cb){
