@@ -19,7 +19,7 @@
 		<h4 class ="pull-right">$<%=newc.price%>/night</h4>
 	<h4><a><%=newc.name%></a> </h4>		<p>
 	<%=newc.description%></p>
-	<em>Submitted By <% if(newc.author.username){%><%=newc.author.username%><%}%> <%if(!newc.author.username){%>Aadesh<%}%> <%=moment(newc.created).fromNow%></em>
+	<em>Submitted By <% if(newc.author.username){%><%=newc.author.username%><%}%> <%if(!newc.author.username){%>Aadesh<%}%> <%=moment(newc.created).fromNow()%></em>
 
 	<div>
 		<%if(currentUser && currentUser.username===newc.author.username){%><a class = "btn btn-warning btn-xs" href="/campgrounds/<%=newc._id%>/edit">Edit</a>
