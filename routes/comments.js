@@ -2,13 +2,6 @@ var express = require("express");
 var router = express.Router();
 var Campground= require("../models/campground.js");
 var Comment = require("../models/comment.js");
-router.get("/campgrounds/:id/comments/new",isLoggedIn,function(req,res)
-	   {
-	Campground.findById(req.params.id,function(err,campground)
-					   {
-		res.render("comments/new.ejs",{campground:campground});
-	});
-});
 router.post("/campgrounds/:id/comments",isLoggedIn,function(req,res)
 		{
 	Campground.findById(req.params.id,function(err,camp)
@@ -25,15 +18,7 @@ router.post("/campgrounds/:id/comments",isLoggedIn,function(req,res)
 		});
 	});
 });
-router.get("/campgrounds/:id/comments/:iden/edit",checkUserAuth,function(req,res)
-		  {
-		   Campground.findById(req.params.id,function(err,camp)
-							   {
-			   Comment.findById(req.params.iden,function(err,comm)
-							   {
-							res.render("comments/edit.ejs",{campground:camp,comment:comm});
-								});
-		   })});
+
 router.put("/campgrounds/:id/comments/:iden",checkUserAuth,function(req,res)
 		  {
 	Comment.findByIdAndUpdate(req.params.iden,req.body.comment,function(err,updated)

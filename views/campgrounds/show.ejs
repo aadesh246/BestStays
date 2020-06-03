@@ -33,25 +33,59 @@
 
 					</div></div>
 <div class ="well" style ="background:#d3e5e6">
-	<div><a href = "/campgrounds/<%=newc._id%>/comments/new" class ="btn btn-success pull-right">Add new comment</a>
+	<div>  <a class="btn btn-success pull-right" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+    Add New Comment
+	
+  </a>
+
 	</div>
+	<div class =" well collapse" id="collapseExample" style="margin-top:50px; border-left: 3px solid green">
+		<h4 style="margin-bottom:20px">
+			Write your comment <i class="fas fa-pen-alt"></i>
+		</h4>
+		<form action="/campgrounds/<%=newc._id%>/comments" method="POST">
+			<textarea class = "form-control form-group" type="textarea" name = "comment[text]" placeholder = "Add your Comment Here" required>
+</textarea> 
+	
+		 <button class ="btn btn-success"style="margin-bottom:20px">
+			 Comment <i class="fas fa-comments"></i>
+		</button>
+			</form>
+	</div>
+	
+		
+	
 	<br>
 	<hr>
 	
 	<%newc.comments.forEach(function(comment){%>
 <div style="margin-bottom:10px" class ="comment"> <span><strong><%=comment.author.username%></strong></span> <span class ="pull-right"><%=moment(comment.date).fromNow()%></span> 
 	<div>
-		<%=comment.text%><%if(currentUser&&comment.author.username===currentUser.username){%> <span class="pull-right" ><a href = "/campgrounds/<%=newc._id%>/comments/<%=comment._id%>/edit"><i class="far fa-edit"></i></a>
+		<%=comment.text%><%if(currentUser&&comment.author.username===currentUser.username){%> <span class="pull-right" ><a href = "#collapse<%=comment._id%>" data-toggle="collapse"  role="button" aria-expanded="false" aria-controls="collapse<%=comment._id%>"><i class="far fa-edit"></i></a>
 		
 	<form style="display:inline" action = "/campgrounds/<%=newc._id%>/comments/<%=comment._id%>?_method=DELETE" method="POST">
 		<button style="padding:0; border:none; background:none">
 			<i class="fas fa-trash-alt"></i>
 		</button>
-	</form></span><%}%>
+	</form></span>
+		<div class =" well collapse" id="collapse<%=comment._id%>" style="margin-top:50px; border-left: 3px solid green">
+		<h4 style="margin-bottom:20px">
+			Edit your comment <i class="fas fa-pen-alt"></i>
+		</h4>
+		<form action="/campgrounds/<%=newc._id%>/comments/<%=comment._id%>?_method=PUT" method="POST">
+			<textarea class = "form-control form-group" type="textarea" name = "comment[text]" placeholder = "Add your Comment Here"required ><%=comment.text%>
+</textarea> 
+	
+		 <button class ="btn btn-success"style="margin-bottom:20px">
+			 Comment <i class="fas fa-comments"></i>
+		</button>
+			</form>
+	</div>
+	<%}%>
 
 	</div>
 	</div>
-
+<hr>
 <%});%>
 
 			</div>
@@ -59,4 +93,5 @@
 		</div>
 	</div>
 </div>	
+
 <%-include("../partials/footer.ejs")%>
