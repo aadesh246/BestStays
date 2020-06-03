@@ -39,7 +39,7 @@
 	<hr>
 	
 	<%newc.comments.forEach(function(comment){%>
-<div style="margin-bottom:10px" class ="comment"> <span><strong><%=comment.author.username%></strong></span> <span class ="pull-right"><%=comment.date.toDateString()%></span> 
+<div style="margin-bottom:10px" class ="comment"> <span><strong><%=comment.author.username%></strong></span> <span class ="pull-right"><%=moment(comment.date).fromNow()%></span> 
 	<div>
 		<%=comment.text%><%if(currentUser&&comment.author.username===currentUser.username){%> <span class="pull-right" ><a href = "/campgrounds/<%=newc._id%>/comments/<%=comment._id%>/edit"><i class="far fa-edit"></i></a>
 		

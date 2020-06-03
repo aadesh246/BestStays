@@ -26,7 +26,7 @@ mongoose.connect(process.env.DATABASEURL,{
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(__dirname + "/public"));
-
+app.locals.moment = require('moment');
 app.use(flash());
 app.use(require("express-session")({
     secret: "Rusty is the best and cutest dog in the world",
