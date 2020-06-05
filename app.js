@@ -19,7 +19,8 @@ var campgroundRoutes = require("./routes/campgrounds.js"),
 var passport = require('passport');
 
 var GoogleStrategy = require( 'passport-google-oauth2' ).Strategy;
-mongoose.connect(process.env.DATABASEURL,{
+var x = process.env.DATABASEURL||"mongodb://localhost/yelp_camp";
+mongoose.connect(x,{
 	useNewUrlParser:true,
 	useCreateIndex:true
 }).then(() =>{console.log("Connected")});

@@ -15,6 +15,7 @@ router.post("/campgrounds",isLoggedIn,function(req,res)
 		  var newimg = req.body.image;
 		 var desc = req.body.description;
 		 var price = req.body.price;
+		 
 		 var author ={
 			 id:req.user._id, username:req.user.username
 		 }

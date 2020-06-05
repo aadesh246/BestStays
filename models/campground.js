@@ -4,12 +4,13 @@ var campSchema = new mongoose.Schema({
 	image:String,
 	description:String,
 	price:String,
-	created:{type:Date,default:Date.now},
+	date:{type:Date,default:Date.now},
 	comments:[{
 	type:mongoose.Schema.Types.ObjectId,
 		ref:"Comment"
 	
 }],
+	rating:Number,
 	author:
 	{
 		id:{

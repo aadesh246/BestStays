@@ -19,7 +19,12 @@
 		<h4 class ="pull-right">$<%=newc.price%>/night</h4>
 	<h4><a><%=newc.name%></a> </h4>		<p>
 	<%=newc.description%></p>
-	<em>Submitted By <% if(newc.author.username){%><%=newc.author.username%><%}%> <%if(!newc.author.username){%>Aadesh<%}%> <%=moment(newc.created).fromNow()%></em>
+	<em>Submitted By <% if(newc.author.username){%><%=newc.author.username%><%}%> <%if(!newc.author.username){%>Aadesh<%}%> <%=moment(newc.date).fromNow()%></em>
+	<br>
+	<p>
+		
+	<strong><em style="font-family:'Okra'"><%if (newc.comments.length==0){%>No Reviews Yet<%}%>
+		<%if(newc.comments.length>0){%>Rated <%=newc.rating%> stars out of 5<%}%></em></strong></p>
 
 	<div>
 		<%if(currentUser && currentUser.username===newc.author.username){%><a class = "btn btn-warning btn-xs" href="/campgrounds/<%=newc._id%>/edit">Edit</a>
@@ -44,7 +49,24 @@
 			Write your comment <i class="fas fa-pen-alt"></i>
 		</h4>
 		<form action="/campgrounds/<%=newc._id%>/comments" method="POST">
-			<textarea class = "form-control form-group" type="textarea" name = "comment[text]" placeholder = "Add your Comment Here" required>
+			<fieldset class="starability-basic">
+
+<p>
+	<em>Leave a Rating!!!</em>
+				</p>
+  <input type="radio" id="first-rate1" name="comment[rating]" value="1" required/>
+  <label for="first-rate1" title="Terrible">1 star</label>
+  <input type="radio" id="first-rate2" name="comment[rating]" value="2" required/>
+  <label for="first-rate2" title="Not good">2 stars</label>
+  <input type="radio" id="first-rate3" name="comment[rating]" value="3" required/>
+  <label for="first-rate3" title="Average">3 stars</label>
+  <input type="radio" id="first-rate4" name="comment[rating]" value="4" required/>
+  <label for="first-rate4" title="Very good">4 stars</label>
+  <input type="radio" id="first-rate5" name="comment[rating]" value="5"required checked />
+  <label for="first-rate5" title="Amazing">5 stars</label>
+</fieldset>
+
+			<textarea class = "form-control form-group" type="textarea" name = "comment[text]" placeholder = "Add your Comment Here" >
 </textarea> 
 	
 		 <button class ="btn btn-success"style="margin-bottom:20px">
@@ -61,7 +83,14 @@
 	<%newc.comments.forEach(function(comment){%>
 <div style="margin-bottom:10px" class ="comment"> <span><strong><%=comment.author.username%></strong></span> <span class ="pull-right"><%=moment(comment.date).fromNow()%></span> 
 	<div>
-		<%=comment.text%><%if(currentUser&&comment.author.username===currentUser.username){%> <span class="pull-right" ><a href = "#collapse<%=comment._id%>" data-toggle="collapse"  role="button" aria-expanded="false" aria-controls="collapse<%=comment._id%>"><i class="far fa-edit"></i></a>
+	<div>
+		<span class="fa fa-star checked"></span>
+                    <span class="fa fa-star <% if (comment.rating > 1.5) { %> checked <% } %>"></span>
+                    <span class="fa fa-star <% if (comment.rating > 2.5) { %> checked <% } %>"></span>
+                    <span class="fa fa-star <% if (comment.rating > 3.5) { %> checked <% } %>"></span>
+                    <span class="fa fa-star <% if (comment.rating > 4.5) { %> checked <% } %>"></span>
+	
+		</div><%if(comment.text){%><%=comment.text%><%}%><%if(currentUser&&comment.author.username===currentUser.username){%> <span class="pull-right" ><a href = "#collapse<%=comment._id%>" data-toggle="collapse"  role="button" aria-expanded="false" aria-controls="collapse<%=comment._id%>"><i class="far fa-edit"></i></a>
 		
 	<form style="display:inline" action = "/campgrounds/<%=newc._id%>/comments/<%=comment._id%>?_method=DELETE" method="POST">
 		<button style="padding:0; border:none; background:none">
@@ -73,7 +102,23 @@
 			Edit your comment <i class="fas fa-pen-alt"></i>
 		</h4>
 		<form action="/campgrounds/<%=newc._id%>/comments/<%=comment._id%>?_method=PUT" method="POST">
-			<textarea class = "form-control form-group" type="textarea" name = "comment[text]" placeholder = "Add your Comment Here"required ><%=comment.text%>
+				<fieldset class="starability-basic">
+					<p>
+						<em>Leave A Rating!!!</em>
+					</p>
+  <input type="radio" id="second-rate1" name="comment[rating]" value="1" />
+  <label for="second-rate1" title="Terrible">1 star</label>
+  <input type="radio" id="second-rate2" name="comment[rating]" value="2" />
+  <label for="second-rate2" title="Not good">2 stars</label>
+  <input type="radio" id="second-rate3" name="comment[rating]" value="3" />
+  <label for="second-rate3" title="Average">3 stars</label>
+  <input type="radio" id="second-rate4" name="comment[rating]" value="4" />
+  <label for="second-rate4" title="Very good">4 stars</label>
+  <input type="radio" id="second-rate5" name="comment[rating]" value="5" checked/>
+  <label for="second-rate5" title="Amazing">5 stars</label>
+</fieldset>
+
+			<textarea class = "form-control form-group" type="textarea" name = "comment[text]" placeholder = "Add your review here" ><%=comment.text%>
 </textarea> 
 	
 		 <button class ="btn btn-success"style="margin-bottom:20px">
