@@ -2,7 +2,7 @@ var express = require("express");
 var router = express.Router();
 var Campground= require("../models/campground.js");
 var Comment = require("../models/comment.js");
-router.post("/campgrounds/:id/comments",isLoggedIn,function(req,res)
+router.post("/campgrounds/:id/comments",checkReview,function(req,res)
 		{
 	Campground.findById(req.params.id).populate("comments").exec(function(err,camp)
 					   {
@@ -83,4 +83,29 @@ function findavg(comments)
 	 return s/(comments.length);
 		
 	}
+function checkReview(req,res,next)
+{    if(req.isAuthenticated())
+	{
+		
+	
+	Campground.findById(req.params.id).populate("comments").exec(function(err,camp)
+					   {
+		var x =0;var y = camp.comments;
+		y.forEach(function(comment)
+							 {
+			if(comment.author.username===req.user.username)
+			x=1;
+		});
+		if(x==0)
+			{
+			return next();
+			}
+		else
+			{
+				req.flash("error","You have already reviewed the campground. Kindly edit your review to make changes.");
+				res.redirect("/campgrounds/"+camp._id);
+			}
+	})}
+ else res.redirect("/login");
+}
 module.exports = router;
