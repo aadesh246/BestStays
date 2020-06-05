@@ -8,8 +8,7 @@
 			View our hand-picked campgrounds from all over the world
 		</p>
 		<a href="/campgrounds/new"><button class="btn btn-primary btn-lg">
-			Add New Campground
-		</button>
+			Add New Ca		</button>
 		</a>
 	</div>
    </div>
@@ -23,7 +22,7 @@
 				<h4>
 					<%=camp.name%> </h4></div><p>
 			
-			                    <% if (!camp.rating) { %>
+			                    <% if (camp.comments.length===0) { %>
                     <em>No reviews yet.</em>
                     <% } else { %>
                     <span class="fa fa-star checked"></span>
