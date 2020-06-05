@@ -25,7 +25,7 @@
 		
 	<strong><em style="font-family:'Okra'"><%if (newc.comments.length==0){%>No Reviews Yet<%}%>
 		<%if(newc.comments.length>0){%>Rated <%=newc.rating%> stars out of 5<%}%></em></strong></p>
-
+<a class = "btn btn-primary" href="/campgrounds">Go Back</a>
 	<div>
 		<%if(currentUser && currentUser.username===newc.author.username){%><a class = "btn btn-warning btn-xs" href="/campgrounds/<%=newc._id%>/edit">Edit</a>
 		<form style ="display:inline" nameaction = "/campgrounds/<%=newc._id%>?_method=DELETE"method ="POST">
