@@ -10,7 +10,7 @@ var campSchema = new mongoose.Schema({
 		ref:"Comment"
 	
 }],
-	rating:Number,
+	rating:{type:Number,default:0},
 	author:
 	{
 		id:{
