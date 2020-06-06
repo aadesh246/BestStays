@@ -8,8 +8,16 @@
 			View our hand-picked campgrounds from all over the world
 		</p>
 		<a href="/campgrounds/new"><button class="btn btn-primary btn-lg">
-			Add New Campground		</button>
-		</a>
+			Add New Campground		</button></a>
+			<form class="form-inline"style ="margin-top:20px" action = "/campgrounds" method="GET">
+  <div class="form-group" >
+    <input type="text" class="form-control" name = "search" placeholder="Campground Search..">
+  </div>
+  
+  <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
+</form>
+
+		
 	</div>
    </div>
 <div class = "container">
@@ -38,24 +46,4 @@
 		<%});%>
 		
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <%-include("../partials/footer.ejs")%>

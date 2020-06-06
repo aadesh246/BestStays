@@ -4,11 +4,26 @@ var router = express.Router();
 var Campground= require("../models/campground.js")
 router.get("/campgrounds",function(req,res)
 	    {
+	if(req.query.search &&req.query.search.length>0)
+		{
+			       const regex = new RegExp(escapeRegex(req.query.search), 'gi');
+      Campground.find({ "name": regex }, function(err, camps) {
+           if(camps.length===0) {
+               req.flash("error","The campground you are looking for could not be found");
+			   res.redirect("/campgrounds");
+           } else {
+              res.render("campgrounds/index.ejs", { arr: camps });
+		   }
+       }); 
+
+		}
+	else
+		{
 		Campground.find({},function(err,allcamps)
 					   {
 			if(err) console.log(err);
 			else
-			res.render("campgrounds/index.ejs",{arr:allcamps});});
+			res.render("campgrounds/index.ejs",{arr:allcamps});});}
 		});
 router.post("/campgrounds",isLoggedIn,function(req,res)
 		{ var newName=req.body.name;
@@ -86,5 +101,9 @@ function checkUserAuth(req,res,next)
 		
 	
 }
+function escapeRegex(text) {
+    return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
+};
+
 
 module.exports = router;
