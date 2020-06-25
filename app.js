@@ -39,8 +39,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 passport.use(new LocalStrategy(User.authenticate()));
 passport.use(new GoogleStrategy({
-    clientID: "313017906178-sd6u4rtmg4arq0lcrqhlcv5g9mh9rh8s.apps.googleusercontent.com",
-    clientSecret: "49ZCkG0VvmGhHm5LSu4tKfvl",
+    clientID: yourGoogleClientId,
+    clientSecret: yourClientSecret,
     callbackURL: "https://yelp-camp-aadesh.herokuapp.com/auth/google/callback",
 	     passReqToCallback   : true
   },
